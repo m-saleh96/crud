@@ -9,51 +9,54 @@
     <link rel="stylesheet" href="css/all.min.css" />
   </head>
 
-  <body>
-    <form class="container-fluid p-5">
-      <div class="form-group">
-        <label for="">ProductName :</label>
-        <input class="form-control" type="text" id="productNameInput"  />
-      </div>
-      <div class="form-group">
-        <label for="">ProductPrice :</label>
-        <input class="form-control" type="number" id="productPriceInput"  />
-      </div>
-      <div class="form-group">
-        <label for="">ProductCategory :</label>
-        <input class="form-control" type="text" id="productCategoryInput" />
-      </div>
-      <div class="form-group">
-        <label for="">ProductDesc :</label>
-        <textarea
-          class="form-control"
+  <body class="bg-secondary">
+    <section class="container">
+      <form class="container-fluid p-5">
+        <div class="form-group">
+          <label for="">ProductName :</label>
+          <input class="form-control" type="text" id="productNameInput"  />
+        </div>
+        <div class="form-group">
+          <label for="">ProductPrice :</label>
+          <input class="form-control" type="number" id="productPriceInput"  />
+        </div>
+        <div class="form-group">
+          <label for="">ProductCategory :</label>
+          <input class="form-control" type="text" id="productCategoryInput" />
+        </div>
+        <div class="form-group">
+          <label for="">ProductDesc :</label>
+          <textarea
+            class="form-control"
+            type="text"
+            id="productDescInput"
+          ></textarea>
+        </div>
+
+        <button onclick="addProduct()" class="btn btn-dark">Add Product</button>
+      </form>
+    </section>
+    <section class="container">
+      <div class="container-fluid p-5">
+        <input
+          onkeyup="searchProduct()"
+          class="form-control w-75 mx-auto my-4"
           type="text"
-          id="productDescInput"
-        ></textarea>
+          id="searchInput"
+          placeholder="search"
+        />
+        <table class="table w-100 mx-auto table-responsive-sm table-responsive-md table-responsive-lg">
+          <thead>
+            <th>ProductName</th>
+            <th>ProductPrice</th>
+            <th>ProductCategory</th>
+            <th>ProductDesc</th>
+            <th>delete</th>
+          </thead>
+          <tbody id="tablebody"></tbody>
+        </table>
       </div>
-
-      <button onclick="addProduct()" class="btn btn-info">Add Product</button>
-    </form>
-
-    <div class="container-fluid p-5">
-      <input
-        onkeyup="searchProduct()"
-        class="form-control w-50 mx-auto my-4"
-        type="text"
-        id="searchInput"
-        placeholder="search"
-      />
-      <table class="table w-75 mx-auto">
-        <thead>
-          <th>ProductName</th>
-          <th>ProductPrice</th>
-          <th>ProductCategory</th>
-          <th>ProductDesc</th>
-          <th>delete</th>
-        </thead>
-        <tbody id="tablebody"></tbody>
-      </table>
-    </div>
+    </section>
 
     <script src="js/index.js"></script>
   </body>
