@@ -33,7 +33,8 @@
           ></textarea>
         </div>
 
-        <button onclick="addProduct()" class="btn btn-dark">Add Product</button>
+        <button id="add" onclick="addProduct()" class="btn btn-dark">Add Product</button>
+        <button id="updata" class="btn btn-primary d-none">Updae</button>
       </form>
     </section>
     <section class="container">
@@ -51,6 +52,7 @@
             <th>ProductPrice</th>
             <th>ProductCategory</th>
             <th>ProductDesc</th>
+            <th>update</th>
             <th>delete</th>
           </thead>
           <tbody id="tablebody"></tbody>
