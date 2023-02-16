@@ -12,12 +12,11 @@ if (localStorage.getItem("our product") == null) {
   productsList = [];
 } else {
   productsList = JSON.parse(localStorage.getItem("our product"));
-  displayProduct(productsList);
+  displayProduct();
 }
 
 function addProduct() {
   product = {
-    id: Math.floor(Math.random() * 1000),
     name: productNameInput.value,
     price: productPriceInput.value,
     category: productCategoryInput.value,
@@ -25,20 +24,21 @@ function addProduct() {
   };
   productsList.push(product);
   localStorage.setItem("our product", JSON.stringify(productsList));
-  displayProduct(productsList);
+  displayProduct();
   clearProduct();
 }
 
-function displayProduct(array) {
+function displayProduct() {
   view = "";
-  for (var i = 0; i < array.length; i++) {
+  for (var i = 0; i < productsList.length; i++) {
     view += `<tr>
-                    <td>${array[i].name}</td>
-                    <td>${array[i].price}</td>
-                    <td>${array[i].category}</td>
-                    <td>${array[i].desc}</td>
+                    <td>${i}</td>
+                    <td>${productsList[i].name}</td>
+                    <td>${productsList[i].price}</td>
+                    <td>${productsList[i].category}</td>
+                    <td>${productsList[i].desc}</td>
                     <td><button onclick='updatetable(${i})' class="btn btn-primary">update</button></td>
-                    <td><button onclick='deleteProduct(${array[i].id})' class="btn btn-danger">delete</button></td>
+                    <td><button onclick='deleteProduct(${i})' class="btn btn-danger">delete</button></td>
                 </tr>
         `;
   }
@@ -52,11 +52,10 @@ function clearProduct() {
   productDescInput.value = "";
 }
 
-function deleteProduct(ID) {
-  const Filterd = productsList.filter((product) => product.id != ID);
-  localStorage.setItem("our product", JSON.stringify(Filterd));
-  productsList = Filterd;
-  displayProduct(productsList);
+function deleteProduct(i) {
+  productsList.splice(i,1)
+  localStorage.setItem("our product", JSON.stringify(productsList));
+  displayProduct();
 }
 
 function updatetable(i) {
@@ -76,15 +75,25 @@ function upadate(i) {
   localStorage.setItem("our product" , JSON.stringify(productsList))
   updata.classList.add("d-none")
   add.classList.remove("d-none")
-  displayProduct(productsList)
+  displayProduct()
 }
 
-function searchProduct() {
-  var term = searchInput.value;
-  const Filterd = productsList.filter((product) => {
-    if (product.name.toLowerCase().includes(term.toLowerCase())) {
-      return product;
+function searchProduct(value) {
+  let view = ""
+  for (let i = 0; i < productsList.length; i++) {
+    if (productsList[i].name.toLowerCase().includes(value.toLowerCase())) {
+      view += `<tr>
+      <td>${i}</td>
+      <td>${productsList[i].name}</td>
+      <td>${productsList[i].price}</td>
+      <td>${productsList[i].category}</td>
+      <td>${productsList[i].desc}</td>
+      <td><button onclick='updatetable(${i})' class="btn btn-primary">update</button></td>
+      <td><button onclick='deleteProduct(${i})' class="btn btn-danger">delete</button></td>
+    </tr>
+    `;
     }
-  });
-  displayProduct(Filterd);
+    
+  }
+  document.getElementById("tablebody").innerHTML = view
 }
