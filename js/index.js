@@ -3,6 +3,8 @@ var productPriceInput = document.getElementById("productPriceInput");
 var productCategoryInput = document.getElementById("productCategoryInput");
 var productDescInput = document.getElementById("productDescInput");
 var searchInput = document.getElementById("searchInput");
+var add = document.getElementById("add");
+var updata = document.getElementById("updata");
 
 var productsList = [];
 
@@ -35,6 +37,7 @@ function displayProduct(array) {
                     <td>${array[i].price}</td>
                     <td>${array[i].category}</td>
                     <td>${array[i].desc}</td>
+                    <td><button onclick='updatetable(${i})' class="btn btn-primary">update</button></td>
                     <td><button onclick='deleteProduct(${array[i].id})' class="btn btn-danger">delete</button></td>
                 </tr>
         `;
@@ -54,6 +57,26 @@ function deleteProduct(ID) {
   localStorage.setItem("our product", JSON.stringify(Filterd));
   productsList = Filterd;
   displayProduct(productsList);
+}
+
+function updatetable(i) {
+  productNameInput.value = productsList[i].name
+  productPriceInput.value = productsList[i].price
+  productCategoryInput.value = productsList[i].category
+  productDescInput.value = productsList[i].desc
+  add.classList.add("d-none")
+  updata.classList.remove("d-none")
+  updata.setAttribute("onclick",`upadate(${i})`)
+}
+function upadate(i) {
+  productsList[i].name = productNameInput.value
+  productsList[i].price = productPriceInput.value
+  productsList[i].category = productCategoryInput.value
+  productsList[i].desc = productDescInput.value
+  localStorage.setItem("our product" , JSON.stringify(productsList))
+  updata.classList.add("d-none")
+  add.classList.remove("d-none")
+  displayProduct(productsList)
 }
 
 function searchProduct() {
