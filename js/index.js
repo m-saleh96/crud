@@ -1,13 +1,14 @@
-var productNameInput = document.getElementById("productNameInput");
-var productPriceInput = document.getElementById("productPriceInput");
-var productCategoryInput = document.getElementById("productCategoryInput");
-var productDescInput = document.getElementById("productDescInput");
-var searchInput = document.getElementById("searchInput");
-var add = document.getElementById("add");
-var updata = document.getElementById("updata");
+const productNameInput = document.getElementById("productNameInput");
+const productPriceInput = document.getElementById("productPriceInput");
+const productCategoryInput = document.getElementById("productCategoryInput");
+const productDescInput = document.getElementById("productDescInput");
+const searchInput = document.getElementById("searchInput");
+const add = document.getElementById("add");
+const updata = document.getElementById("updata");
 
 var productsList = [];
 
+//-------------------------Local Storage--------------------------------
 if (localStorage.getItem("our product") == null) {
   productsList = [];
 } else {
@@ -15,6 +16,7 @@ if (localStorage.getItem("our product") == null) {
   displayProduct();
 }
 
+//-------------------------Add Product--------------------------------
 function addProduct() {
   product = {
     name: productNameInput.value,
@@ -28,6 +30,7 @@ function addProduct() {
   clearProduct();
 }
 
+//-------------------------display Product--------------------------------
 function displayProduct() {
   view = "";
   for (var i = 0; i < productsList.length; i++) {
@@ -45,6 +48,7 @@ function displayProduct() {
   document.getElementById("tablebody").innerHTML = view;
 }
 
+//-------------------------Clear Input after add product-------------------
 function clearProduct() {
   productNameInput.value = "";
   productPriceInput.value = "";
@@ -52,12 +56,14 @@ function clearProduct() {
   productDescInput.value = "";
 }
 
+//-------------------------Delete Product--------------------------------
 function deleteProduct(i) {
   productsList.splice(i,1)
   localStorage.setItem("our product", JSON.stringify(productsList));
   displayProduct();
 }
 
+//-------------------------Up Product Info For update--------------------
 function updatetable(i) {
   productNameInput.value = productsList[i].name
   productPriceInput.value = productsList[i].price
@@ -67,6 +73,8 @@ function updatetable(i) {
   updata.classList.remove("d-none")
   updata.setAttribute("onclick",`upadate(${i})`)
 }
+
+//-------------------------Update Product--------------------------------
 function upadate(i) {
   productsList[i].name = productNameInput.value
   productsList[i].price = productPriceInput.value
@@ -78,6 +86,7 @@ function upadate(i) {
   displayProduct()
 }
 
+//-------------------------Search Product--------------------------------
 function searchProduct(value) {
   let view = ""
   for (let i = 0; i < productsList.length; i++) {
